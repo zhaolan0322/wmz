@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>内容监控工具原型</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./content-monitor-prototype.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="artboard">
+      <div class="window-bar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="workspace">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="brand-mark">CM</div>
+            <div>
+              <p class="eyebrow">Content Monitor</p>
+              <h1>内容监控台</h1>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="section-title">
+              <span>监控分类</span>
+              <button class="ghost-btn">+ 新建</button>
+            </div>
+
+            <button class="category-card active">
+              <div>
+                <strong>Claude Code 选题监控</strong>
+                <p>4 平台 · 18 关键词 · 12 博主</p>
+              </div>
+              <span class="tag success">今日已更新</span>
+            </button>
+
+            <button class="category-card">
+              <div>
+                <strong>Vibe Coding 选题监控</strong>
+                <p>3 平台 · 11 关键词 · 8 博主</p>
+              </div>
+              <span class="tag muted">08:30 运行</span>
+            </button>
+
+            <button class="category-card">
+              <div>
+                <strong>AI 工具资讯监控</strong>
+                <p>5 平台 · 24 关键词 · 16 博主</p>
+              </div>
+              <span class="tag muted">等待运行</span>
+            </button>
+          </div>
+
+          <div class="sidebar-metric">
+            <p class="eyebrow">本日概览</p>
+            <div class="metric-grid mini">
+              <article>
+                <strong>126</strong>
+                <span>新增内容</span>
+              </article>
+              <article>
+                <strong>14</strong>
+                <span>爆款信号</span>
+              </article>
+              <article>
+                <strong>7</strong>
+                <span>AI 选题</span>
+              </article>
+              <article>
+                <strong>09:00</strong>
+                <span>每日运行</span>
+              </article>
+            </div>
+          </div>
+        </aside>
+
+        <section class="main-panel">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">分类工作区</p>
+              <h2>Claude Code 选题监控</h2>
+              <div class="header-meta">
+                <span>最近运行：今天 09:02</span>
+                <span>AI 报告：已生成</span>
+                <span>监控状态：正常</span>
+              </div>
+            </div>
+
+            <div class="header-actions">
+              <button class="ghost-btn">查看日志</button>
+              <button class="primary-btn">立即运行一次</button>
+            </div>
+          </header>
+
+          <nav class="top-tabs">
+            <button class="active">内容</button>
+            <button>选题分析与报告</button>
+            <button>监控设置</button>
+          </nav>
+
+          <section class="overview-strip">
+            <article>
+              <span>今日采集</span>
+              <strong>38 条</strong>
+            </article>
+            <article>
+              <span>热点内容</span>
+              <strong>10 条</strong>
+            </article>
+            <article>
+              <span>覆盖平台</span>
+              <strong>4 个</strong>
+            </article>
+            <article>
+              <span>活跃博主</span>
+              <strong>15 位</strong>
+            </article>
+          </section>
+
+          <section class="content-layout">
+            <div class="filter-row">
+              <div class="chip-group">
+                <button class="chip active">全部 38</button>
+                <button class="chip">小红书 12</button>
+                <button class="chip">抖音 9</button>
+                <button class="chip">微博 7</button>
+                <button class="chip">B站 10</button>
+              </div>
+              <div class="filter-hint">平台直接点选，不用下拉</div>
+            </div>
+
+            <div class="date-rail">
+              <div class="rail-header">
+                <div>
+                  <p class="eyebrow">时间浏览</p>
+                  <h3>最近 7 天内容采集情况</h3>
+                </div>
+                <div class="rail-legend">
+                  <span><i class="dot strong"></i>内容高峰</span>
+                  <span><i class="dot soft"></i>已生成报告</span>
+                </div>
+              </div>
+
+              <div class="date-cards">
+                <button class="date-card active">
+                  <span>03/24 周二</span>
+                  <strong>38 条内容</strong>
+                  <p>热点：Claude Code 工作流</p>
+                  <small>爆款 4 · 已出报告</small>
+                </button>
+                <button class="date-card">
+                  <span>03/23 周一</span>
+                  <strong>31 条内容</strong>
+                  <p>热点：并行 Agent 实战</p>
+                  <small>爆款 3 · 已出报告</small>
+                </button>
+                <button class="date-card">
+                  <span>03/22 周日</span>
+                  <strong>26 条内容</strong>
+                  <p>热点：Codex vs Cursor</p>
+                  <small>爆款 2 · 已出报告</small>
+                </button>
+                <button class="date-card">
+                  <span>03/21 周六</span>
+                  <strong>18 条内容</strong>
+                  <p>热点：Vibe Coding 案例</p>
+                  <small>爆款 1 · 未出报告</small>
+                </button>
+              </div>
+            </div>
+
+            <div class="timeline-grid">
+              <section class="timeline-column">
+                <div class="section-title large">
+                  <span>3 月 24 日内容时间线</span>
+                  <button class="ghost-btn">切换到卡片视图</button>
+                </div>
+
+                <article class="timeline-card hot">
+                  <div class="timeline-time">10:40</div>
+                  <div class="timeline-content">
+                    <div class="item-topline">
+                      <span class="platform xhs">小红书</span>
+                      <span class="heat">热度 9.6</span>
+                      <span class="inline-tag">爆款</span>
+                    </div>
+                    <h4>Claude Code 工作流 7 步拆解，为什么团队效率翻倍</h4>
+                    <p>作者：AI 产品黑板报 · 命中关键词：claude code、workflow、团队协作</p>
+                    <p class="desc">内容重点聚焦“可复制流程 + 工具组合”，评论区大量提到模板复用、团队提效、成本对比。</p>
+                  </div>
+                </article>
+
+                <article class="timeline-card">
+                  <div class="timeline-time">09:15</div>
+                  <div class="timeline-content">
+                    <div class="item-topline">
+                      <span class="platform dy">抖音</span>
+                      <span class="heat">热度 8.9</span>
+                      <span class="inline-tag soft">高互动</span>
+                    </div>
+                    <h4>Cursor 不香了？Claude Code 才是程序员新主场</h4>
+                    <p>作者：老韩聊 AI 开发 · 命中关键词：cursor、claude code、对比测评</p>
+                    <p class="desc">采用“冲突型标题 + 实测对比”结构，完播率高，用户更关心真实效率和适用场景。</p>
+                  </div>
+                </article>
+
+                <article class="timeline-card">
+                  <div class="timeline-time">08:05</div>
+                  <div class="timeline-content">
+                    <div class="item-topline">
+                      <span class="platform bilibili">B站</span>
+                      <span class="heat">热度 8.4</span>
+                      <span class="inline-tag soft">新账号</span>
+                    </div>
+                    <h4>我用 Claude Code 做了一个自动内容工厂，结果太夸张了</h4>
+                    <p>作者：代码制造局 · 命中账号：代码制造局 · 关联词：内容工厂、自动化选题</p>
+                    <p class="desc">视频将“自动跑选题”展示得很具体，说明运营场景的内容正在升温，不只是开发效率讨论。</p>
+                  </div>
+                </article>
+              </section>
+
+              <aside class="insight-sidecard">
+                <div class="section-title large">
+                  <span>当天摘要</span>
+                  <button class="ghost-btn">查看完整报告</button>
+                </div>
+                <div class="summary-box">
+                  <p class="eyebrow">今日关键词聚类</p>
+                  <div class="keyword-cloud">
+                    <span>工作流模板</span>
+                    <span>效率翻倍</span>
+                    <span>并行 agent</span>
+                    <span>代码评审</span>
+                    <span>团队协作</span>
+                  </div>
+                </div>
+                <div class="summary-box">
+                  <p class="eyebrow">AI 判断</p>
+                  <p>今天的高热内容不再只讲“工具好不好用”，而是开始强调“怎么接进团队工作流”。这是更接近转化的内容方向。</p>
+                </div>
+                <div class="summary-box">
+                  <p class="eyebrow">建议动作</p>
+                  <ul>
+                    <li>优先跟进“7 步工作流拆解”类选题</li>
+                    <li>补充一篇“Claude Code vs Cursor 使用边界”</li>
+                    <li>针对团队协作场景准备案例素材</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </section>
+      </div>
+    </section>
+
+    <section class="artboard">
+      <div class="window-bar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="workspace compact">
+        <section class="report-board">
+          <header class="board-header">
+            <div>
+              <p class="eyebrow">Tab 2 选题分析与报告</p>
+              <h2>日报视图 + 选题库</h2>
+            </div>
+            <div class="segmented">
+              <button class="active">日报视图</button>
+              <button>选题库</button>
+            </div>
+          </header>
+
+          <div class="report-layout">
+            <aside class="report-days">
+              <button class="report-day active">
+                <strong>03/24</strong>
+                <p>团队工作流类内容明显升温</p>
+                <small>7 个选题 · 10 条热门内容</small>
+              </button>
+              <button class="report-day">
+                <strong>03/23</strong>
+                <p>并行 Agent 与自动评审成主热点</p>
+                <small>5 个选题 · 10 条热门内容</small>
+              </button>
+              <button class="report-day">
+                <strong>03/22</strong>
+                <p>工具对比和成本讨论热度高</p>
+                <small>4 个选题 · 10 条热门内容</small>
+              </button>
+            </aside>
+
+            <section class="report-detail">
+              <div class="detail-panels">
+                <article class="detail-panel">
+                  <p class="eyebrow">前一天用户关注热点</p>
+                  <h3>从“哪个工具更强”转向“如何接入真实工作流”</h3>
+                  <p>前 10 条高热内容中，6 条都在强调团队流程、模板复用、代码评审衔接，而不是单纯展示模型能力。这说明内容受众开始要求更具体、更可复制的方法论。</p>
+                </article>
+
+                <article class="detail-panel accent">
+                  <p class="eyebrow">AI 结论</p>
+                  <h3>适合产出的选题方向</h3>
+                  <div class="topic-cards">
+                    <section class="topic-card">
+                      <div class="topic-head">
+                        <strong>方向 01｜Claude Code 团队工作流模板</strong>
+                        <span class="priority high">高优先级</span>
+                      </div>
+                      <p>为什么做：高热内容持续证明“具体流程模板”比泛工具介绍更容易获得收藏和转发。</p>
+                      <p>爆点与增长空间：可直接给团队复制使用，天然带有实操价值，适合做系列内容和资料包引流。</p>
+                    </section>
+
+                    <section class="topic-card">
+                      <div class="topic-head">
+                        <strong>方向 02｜Claude Code 和 Cursor 到底怎么分工</strong>
+                        <span class="priority medium">中优先级</span>
+                      </div>
+                      <p>为什么做：争议型话题点击率高，且评论区常出现“到底怎么选”的决策困惑。</p>
+                      <p>爆点与增长空间：通过场景拆分而不是简单对比，更容易沉淀成系列矩阵内容。</p>
+                    </section>
+
+                    <section class="topic-card">
+                      <div class="topic-head">
+                        <strong>方向 03｜运营团队如何把 AI 选题接进日报机制</strong>
+                        <span class="priority high">高优先级</span>
+                      </div>
+                      <p>为什么做：内容监控和 AI 生成报告本身就是用户想象空间很大的工作流话题。</p>
+                      <p>爆点与增长空间：兼具方法论和产品感，容易引发“想看工具细节”的后续需求。</p>
+                    </section>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="artboard">
+      <div class="window-bar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="workspace compact">
+        <section class="settings-board">
+          <header class="board-header">
+            <div>
+              <p class="eyebrow">Tab 3 监控设置</p>
+              <h2>分类级监控配置</h2>
+            </div>
+            <button class="primary-btn">保存配置</button>
+          </header>
+
+          <div class="settings-grid">
+            <section class="settings-card">
+              <div class="section-title large">
+                <span>监控平台</span>
+                <span class="muted-label">多选</span>
+              </div>
+              <div class="platform-grid">
+                <label class="platform-option active"><span>小红书</span><small>内容种草</small></label>
+                <label class="platform-option active"><span>抖音</span><small>热视频</small></label>
+                <label class="platform-option active"><span>微博</span><small>热点讨论</small></label>
+                <label class="platform-option active"><span>B站</span><small>长视频</small></label>
+                <label class="platform-option"><span>知乎</span><small>问答观点</small></label>
+              </div>
+            </section>
+
+            <section class="settings-card">
+              <div class="section-title large">
+                <span>对标关键词</span>
+                <button class="ghost-btn">+ 批量添加</button>
+              </div>
+              <div class="token-group">
+                <span class="token">claude code</span>
+                <span class="token">cursor</span>
+                <span class="token">vibe coding</span>
+                <span class="token">agent workflow</span>
+                <span class="token">代码评审</span>
+                <span class="token">团队协作</span>
+              </div>
+            </section>
+
+            <section class="settings-card">
+              <div class="section-title large">
+                <span>对标博主 / 账号</span>
+                <button class="ghost-btn">+ 添加账号</button>
+              </div>
+              <div class="account-list">
+                <article>
+                  <strong>AI 产品黑板报</strong>
+                  <p>小红书 · 最近抓取 2 小时前</p>
+                </article>
+                <article>
+                  <strong>老韩聊 AI 开发</strong>
+                  <p>抖音 · 最近抓取 2 小时前</p>
+                </article>
+                <article>
+                  <strong>代码制造局</strong>
+                  <p>B站 · 最近抓取 1 天前</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="settings-card">
+              <div class="section-title large">
+                <span>运行策略</span>
+                <span class="muted-label">每日自动执行</span>
+              </div>
+              <div class="strategy-grid">
+                <article>
+                  <span>运行时间</span>
+                  <strong>每天 09:00</strong>
+                </article>
+                <article>
+                  <span>采集范围</span>
+                  <strong>最近 24 小时</strong>
+                </article>
+                <article>
+                  <span>分析规则</span>
+                  <strong>热度前 10 内容</strong>
+                </article>
+                <article>
+                  <span>输出结果</span>
+                  <strong>日报 + 选题库</strong>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

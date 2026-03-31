@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>内容监控原型 - 设置</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./content-monitor-prototype.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="artboard">
+      <div class="window-bar"><span></span><span></span><span></span></div>
+      <div class="workspace">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="brand-mark">CM</div>
+            <div>
+              <p class="eyebrow">Content Monitor</p>
+              <h1>内容监控台</h1>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="section-title">
+              <span>监控分类</span>
+              <button class="ghost-btn">+ 新建</button>
+            </div>
+            <button class="category-card active">
+              <div>
+                <strong>Claude Code 选题监控</strong>
+                <p>4 平台 · 18 关键词 · 12 博主</p>
+              </div>
+              <span class="tag success">已开启每日运行</span>
+            </button>
+            <button class="category-card">
+              <div>
+                <strong>Vibe Coding 选题监控</strong>
+                <p>3 平台 · 11 关键词 · 8 博主</p>
+              </div>
+              <span class="tag muted">等待配置</span>
+            </button>
+          </div>
+          <div class="sidebar-metric">
+            <p class="eyebrow">配置概览</p>
+            <div class="metric-grid mini">
+              <article><strong>4</strong><span>启用平台</span></article>
+              <article><strong>18</strong><span>关键词</span></article>
+              <article><strong>12</strong><span>对标博主</span></article>
+              <article><strong>09:00</strong><span>每日运行</span></article>
+            </div>
+          </div>
+        </aside>
+        <section class="main-panel">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">分类工作区</p>
+              <h2>Claude Code 选题监控</h2>
+              <div class="header-meta">
+                <span>运行频率：每天一次</span>
+                <span>采集窗口：最近 24 小时</span>
+                <span>AI 规则：热门前 10 内容</span>
+              </div>
+            </div>
+            <div class="header-actions">
+              <button class="ghost-btn">恢复默认</button>
+              <button class="primary-btn">保存配置</button>
+            </div>
+          </header>
+          <nav class="top-tabs">
+            <button><span class="icon-pill"></span>内容</button>
+            <button><span class="icon-pill"></span>选题分析与报告</button>
+            <button class="active"><span class="icon-pill"></span>监控设置</button>
+          </nav>
+          <section class="overview-strip">
+            <article><span>监控平台</span><strong>4 个</strong></article>
+            <article><span>对标关键词</span><strong>18 个</strong></article>
+            <article><span>对标博主</span><strong>12 位</strong></article>
+            <article><span>自动运行</span><strong>09:00</strong></article>
+          </section>
+          <section class="settings-grid tight">
+            <div class="setting-summary">
+              <section class="settings-card">
+                <div class="section-title large">
+                  <span>监控平台</span>
+                  <span class="muted-label">多选</span>
+                </div>
+                <div class="platform-grid">
+                  <label class="platform-option active">
+                    <span class="platform-badge">红</span>
+                    <span>小红书</span>
+                    <small>内容种草</small>
+                  </label>
+                  <label class="platform-option active">
+                    <span class="platform-badge">抖</span>
+                    <span>抖音</span>
+                    <small>热视频</small>
+                  </label>
+                  <label class="platform-option active">
+                    <span class="platform-badge">微</span>
+                    <span>微博</span>
+                    <small>热点讨论</small>
+                  </label>
+                  <label class="platform-option active">
+                    <span class="platform-badge">B</span>
+                    <span>B站</span>
+                    <small>长视频</small>
+                  </label>
+                  <label class="platform-option">
+                    <span class="platform-badge">知</span>
+                    <span>知乎</span>
+                    <small>问答观点</small>
+                  </label>
+                </div>
+              </section>
+
+              <section class="settings-card">
+                <div class="section-title large">
+                  <span>对标关键词</span>
+                  <button class="ghost-btn">+ 批量添加</button>
+                </div>
+                <div class="token-group">
+                  <span class="token">claude code</span>
+                  <span class="token">cursor</span>
+                  <span class="token">vibe coding</span>
+                  <span class="token">agent workflow</span>
+                  <span class="token">代码评审</span>
+                  <span class="token">团队协作</span>
+                  <span class="token">自动日报</span>
+                  <span class="token">内容工厂</span>
+                </div>
+                <p class="footer-hint">建议区分核心关键词和扩展关键词，方便后续做命中来源分析。</p>
+              </section>
+            </div>
+
+            <div class="setting-summary">
+              <section class="settings-card">
+                <div class="section-title large">
+                  <span>对标博主 / 账号</span>
+                  <button class="ghost-btn">+ 添加账号</button>
+                </div>
+                <div class="account-list">
+                  <article>
+                    <div class="account-top">
+                      <span class="avatar-badge">AI</span>
+                      <div>
+                        <strong>AI 产品黑板报</strong>
+                        <p>小红书 · 最近抓取 2 小时前</p>
+                      </div>
+                    </div>
+                    <div class="list-note"><span>命中 4 条热点</span><span>持续跟踪</span></div>
+                  </article>
+                  <article>
+                    <div class="account-top">
+                      <span class="avatar-badge">韩</span>
+                      <div>
+                        <strong>老韩聊 AI 开发</strong>
+                        <p>抖音 · 最近抓取 2 小时前</p>
+                      </div>
+                    </div>
+                    <div class="list-note"><span>评论活跃高</span><span>优先监控</span></div>
+                  </article>
+                  <article>
+                    <div class="account-top">
+                      <span class="avatar-badge">码</span>
+                      <div>
+                        <strong>代码制造局</strong>
+                        <p>B站 · 最近抓取 1 天前</p>
+                      </div>
+                    </div>
+                    <div class="list-note"><span>长视频案例多</span><span>已加入</span></div>
+                  </article>
+                </div>
+              </section>
+
+              <section class="settings-card">
+                <div class="section-title large">
+                  <span>运行策略与 AI 输出</span>
+                  <span class="muted-label">每日自动执行</span>
+                </div>
+                <div class="two-col-list">
+                  <article><span class="caption">运行时间</span><strong>每天 09:00</strong></article>
+                  <article><span class="caption">采集范围</span><strong>最近 24 小时</strong></article>
+                  <article><span class="caption">分析规则</span><strong>热度前 10 内容</strong></article>
+                  <article><span class="caption">输出结果</span><strong>日报 + 选题库</strong></article>
+                </div>
+                <p class="footer-hint">系统每天自动运行一次，完成内容采集、热点识别、AI 分析和选题产出。</p>
+              </section>
+            </div>
+          </section>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

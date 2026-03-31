@@ -1,0 +1,14 @@
+content-factory/.next/
+content-factory/node_modules/
+content-factory/test-results/
+content-factory/.next-dev*.log
+content-factory/.next-start*.log
+content-factory/.next-start*.out.log
+content-factory/.next-start*.err.log
+content-factory/data/article-snapshots/
+content-factory/data/report-analyses/
+content-factory/data/report-runs/
+content-factory/.env
+content-factory/.env.local
+content-factory/.env.*.local
+content-factory/*.log
