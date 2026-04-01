@@ -1,0 +1,21 @@
+{
+  "case_id": "PP-007",
+  "version": "v1.0",
+  "query": "PPT skill项目 的课程内容结构是什么？",
+  "environment": {
+    "project_id": "ppt-skill-project",
+    "explicit_recall_requested": true,
+    "delivery_level_ceiling": 2
+  },
+  "expected": {
+    "query_type": "chat_simple",
+    "delivery_level": 2,
+    "must_include_memory_ids": [
+      "mem-project-course-outline-1b1fc7708c62"
+    ],
+    "response_contains": [
+      "课程内容结构",
+      "Dify 财务工作流实战训练营"
+    ]
+  }
+}

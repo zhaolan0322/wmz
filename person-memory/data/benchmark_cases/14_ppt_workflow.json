@@ -1,0 +1,22 @@
+{
+  "case_id": "PP-005",
+  "version": "v1.0",
+  "query": "PPT skill项目 的工作流怎么走？",
+  "environment": {
+    "project_id": "ppt-skill-project",
+    "explicit_recall_requested": true,
+    "delivery_level_ceiling": 2
+  },
+  "expected": {
+    "query_type": "project_planning",
+    "delivery_level": 2,
+    "must_include_memory_ids": [
+      "mem-project-workflow-ecaf7572f216"
+    ],
+    "response_contains": [
+      "AI 演示文稿全流程工作流",
+      "Path A",
+      "Path B"
+    ]
+  }
+}

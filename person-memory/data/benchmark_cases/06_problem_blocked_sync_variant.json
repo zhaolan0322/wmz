@@ -1,0 +1,21 @@
+{
+  "case_id": "PB-002",
+  "version": "v1.0",
+  "query": "sync-engine 现在卡住了，优先排查哪些点？",
+  "environment": {
+    "project_id": "sync-engine",
+    "task_id": "task-sync-2",
+    "delivery_level_ceiling": 3
+  },
+  "expected": {
+    "query_type": "problem_blocked",
+    "delivery_level": 3,
+    "must_include_memory_ids": [
+      "mem-proc-sync-debug"
+    ],
+    "response_contains": [
+      "幂等更新",
+      "缓存"
+    ]
+  }
+}

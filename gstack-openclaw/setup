@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v bun >/dev/null 2>&1; then
+  echo "Error: bun is required but not installed." >&2
+  echo "Install it: curl -fsSL https://bun.sh/install | bash" >&2
+  exit 1
+fi
+
+HOST="openclaw"
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --host)
+      [ -z "${2:-}" ] && echo "Missing value for --host (expected openclaw)" >&2 && exit 1
+      HOST="$2"
+      shift 2
+      ;;
+    --host=*)
+      HOST="${1#--host=}"
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+if [ "$HOST" != "openclaw" ]; then
+  echo "Unknown --host value: $HOST (expected openclaw)" >&2
+  exit 1
+fi
+
+SOURCE_GSTACK_DIR="$(cd "$(dirname "$0")" && pwd -P)"
+BROWSE_BIN="$SOURCE_GSTACK_DIR/browse/dist/browse"
+OPENCLAW_SKILLS="$HOME/.openclaw/skills"
+OPENCLAW_GSTACK="$OPENCLAW_SKILLS/gstack"
+GENERATED_SKILLS_DIR="$SOURCE_GSTACK_DIR/.openclaw/skills"
+
+IS_WINDOWS=0
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*|Windows_NT) IS_WINDOWS=1 ;;
+esac
+
+ensure_playwright_browser() {
+  if [ "$IS_WINDOWS" -eq 1 ]; then
+    (
+      cd "$SOURCE_GSTACK_DIR"
+      node -e "const { chromium } = require('playwright'); (async () => { const b = await chromium.launch(); await b.close(); })()" 2>/dev/null
+    )
+  else
+    (
+      cd "$SOURCE_GSTACK_DIR"
+      bun --eval 'import { chromium } from "playwright"; const browser = await chromium.launch(); await browser.close();'
+    ) >/dev/null 2>&1
+  fi
+}
+
+NEEDS_BUILD=0
+if [ ! -x "$BROWSE_BIN" ]; then
+  NEEDS_BUILD=1
+elif [ -n "$(find "$SOURCE_GSTACK_DIR/browse/src" -type f -newer "$BROWSE_BIN" -print -quit 2>/dev/null)" ]; then
+  NEEDS_BUILD=1
+elif [ "$SOURCE_GSTACK_DIR/package.json" -nt "$BROWSE_BIN" ]; then
+  NEEDS_BUILD=1
+elif [ -f "$SOURCE_GSTACK_DIR/bun.lock" ] && [ "$SOURCE_GSTACK_DIR/bun.lock" -nt "$BROWSE_BIN" ]; then
+  NEEDS_BUILD=1
+fi
+
+if [ "$NEEDS_BUILD" -eq 1 ]; then
+  echo "Building browse binary and OpenClaw skills..."
+  (
+    cd "$SOURCE_GSTACK_DIR"
+    bun install
+    bun run build
+  )
+  if [ ! -f "$SOURCE_GSTACK_DIR/browse/dist/.version" ]; then
+    git -C "$SOURCE_GSTACK_DIR" rev-parse HEAD > "$SOURCE_GSTACK_DIR/browse/dist/.version" 2>/dev/null || true
+  fi
+fi
+
+if [ ! -x "$BROWSE_BIN" ]; then
+  echo "Setup failed: browse binary missing at $BROWSE_BIN" >&2
+  exit 1
+fi
+
+NEEDS_OPENCLAW_GEN=0
+if [ ! -d "$GENERATED_SKILLS_DIR" ]; then
+  NEEDS_OPENCLAW_GEN=1
+elif [ -n "$(find "$SOURCE_GSTACK_DIR" -maxdepth 2 -name 'SKILL.md.tmpl' -newer "$GENERATED_SKILLS_DIR" -print -quit 2>/dev/null)" ]; then
+  NEEDS_OPENCLAW_GEN=1
+fi
+
+if [ "$NEEDS_OPENCLAW_GEN" -eq 1 ] && [ "$NEEDS_BUILD" -eq 0 ]; then
+  echo "Generating OpenClaw skill docs..."
+  (
+    cd "$SOURCE_GSTACK_DIR"
+    bun install --frozen-lockfile 2>/dev/null || bun install
+    bun run gen:skill-docs
+  )
+fi
+
+if ! ensure_playwright_browser; then
+  echo "Installing Playwright Chromium..."
+  (
+    cd "$SOURCE_GSTACK_DIR"
+    bunx playwright install chromium
+  )
+
+  if [ "$IS_WINDOWS" -eq 1 ]; then
+    if ! command -v node >/dev/null 2>&1; then
+      echo "Setup failed: Node.js is required on Windows for Playwright verification." >&2
+      exit 1
+    fi
+    (
+      cd "$SOURCE_GSTACK_DIR"
+      node -e "require('playwright')" 2>/dev/null || npm install --no-save playwright
+    )
+  fi
+fi
+
+if ! ensure_playwright_browser; then
+  echo "Setup failed: Playwright Chromium could not be launched" >&2
+  exit 1
+fi
+
+mkdir -p "$HOME/.gstack/projects" "$OPENCLAW_SKILLS"
+
+create_openclaw_runtime_root() {
+  local gstack_dir="$1"
+  local runtime_root="$2"
+  local generated_dir="$gstack_dir/.openclaw/skills"
+
+  if [ -L "$runtime_root" ]; then
+    rm -f "$runtime_root"
+  elif [ -d "$runtime_root" ] && [ "$runtime_root" != "$gstack_dir" ]; then
+    rm -rf "$runtime_root"
+  fi
+
+  mkdir -p "$runtime_root" "$runtime_root/browse" "$runtime_root/gstack-upgrade" "$runtime_root/review"
+
+  if [ -f "$generated_dir/gstack/SKILL.md" ]; then
+    ln -snf "$generated_dir/gstack/SKILL.md" "$runtime_root/SKILL.md"
+  fi
+  if [ -d "$gstack_dir/bin" ]; then
+    ln -snf "$gstack_dir/bin" "$runtime_root/bin"
+  fi
+  if [ -d "$gstack_dir/browse/dist" ]; then
+    ln -snf "$gstack_dir/browse/dist" "$runtime_root/browse/dist"
+  fi
+  if [ -d "$gstack_dir/browse/bin" ]; then
+    ln -snf "$gstack_dir/browse/bin" "$runtime_root/browse/bin"
+  fi
+  if [ -f "$generated_dir/gstack-upgrade/SKILL.md" ]; then
+    ln -snf "$generated_dir/gstack-upgrade/SKILL.md" "$runtime_root/gstack-upgrade/SKILL.md"
+  fi
+  for f in checklist.md design-checklist.md greptile-triage.md TODOS-format.md; do
+    if [ -f "$gstack_dir/review/$f" ]; then
+      ln -snf "$gstack_dir/review/$f" "$runtime_root/review/$f"
+    fi
+  done
+  if [ -f "$gstack_dir/ETHOS.md" ]; then
+    ln -snf "$gstack_dir/ETHOS.md" "$runtime_root/ETHOS.md"
+  fi
+}
+
+link_openclaw_skill_dirs() {
+  local gstack_dir="$1"
+  local skills_dir="$2"
+  local generated_dir="$gstack_dir/.openclaw/skills"
+  local linked=()
+
+  if [ ! -d "$generated_dir" ]; then
+    echo "  warning: .openclaw/skills generation failed; run 'bun run gen:skill-docs' manually" >&2
+    return 1
+  fi
+
+  for skill_dir in "$generated_dir"/gstack*/; do
+    if [ -f "$skill_dir/SKILL.md" ]; then
+      skill_name="$(basename "$skill_dir")"
+      [ "$skill_name" = "gstack" ] && continue
+      target="$skills_dir/$skill_name"
+      if [ -L "$target" ] || [ ! -e "$target" ]; then
+        ln -snf "$skill_dir" "$target"
+        linked+=("$skill_name")
+      fi
+    fi
+  done
+
+  if [ ${#linked[@]} -gt 0 ]; then
+    echo "  linked gstack skills: ${linked[*]}"
+  fi
+}
+
+link_openclaw_wrapper_skill_dirs() {
+  local gstack_dir="$1"
+  local skills_dir="$2"
+  local wrappers_dir="$gstack_dir/openclaw/skills"
+  local linked=()
+
+  [ -d "$wrappers_dir" ] || return 0
+
+  for skill_dir in "$wrappers_dir"/*/; do
+    if [ -f "$skill_dir/SKILL.md" ]; then
+      skill_name="$(basename "$skill_dir")"
+      target="$skills_dir/$skill_name"
+      if [ -L "$target" ] || [ ! -e "$target" ]; then
+        ln -snf "$skill_dir" "$target"
+        linked+=("$skill_name")
+      fi
+    fi
+  done
+
+  if [ ${#linked[@]} -gt 0 ]; then
+    echo "  linked OpenClaw wrappers: ${linked[*]}"
+  fi
+}
+
+create_openclaw_runtime_root "$SOURCE_GSTACK_DIR" "$OPENCLAW_GSTACK"
+link_openclaw_skill_dirs "$SOURCE_GSTACK_DIR" "$OPENCLAW_SKILLS"
+link_openclaw_wrapper_skill_dirs "$SOURCE_GSTACK_DIR" "$OPENCLAW_SKILLS"
+
+echo "gstack ready (openclaw)."
+echo "  browse: $BROWSE_BIN"
+echo "  openclaw skills: $OPENCLAW_SKILLS"
+
+if [ ! -d "$HOME/.gstack" ]; then
+  mkdir -p "$HOME/.gstack"
+  echo "  Welcome! Run /gstack-upgrade anytime to stay current."
+fi
+
+rm -f /tmp/gstack-latest-version

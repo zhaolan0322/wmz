@@ -1,0 +1,18 @@
+{
+  "case_id": "TC-002",
+  "version": "v1.0",
+  "query": "继续现在的论文记忆系统工作",
+  "environment": {
+    "task_id": "task-memory-mvp"
+  },
+  "expected": {
+    "query_type": "task_continue",
+    "delivery_level": 2,
+    "must_include_memory_ids": [
+      "mem-work-memory-mvp"
+    ],
+    "response_contains": [
+      "MVP"
+    ]
+  }
+}

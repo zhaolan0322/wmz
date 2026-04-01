@@ -1,0 +1,22 @@
+{
+  "case_id": "PB-004",
+  "version": "v1.0",
+  "query": "请根据之前的经验，告诉我做 PPT skill 时先看什么",
+  "environment": {
+    "project_id": "ppt-skill-project",
+    "explicit_recall_requested": true,
+    "delivery_level_ceiling": 2
+  },
+  "expected": {
+    "query_type": "problem_blocked",
+    "delivery_level": 2,
+    "must_include_memory_ids": [
+      "mem-project-entry-2e4187047d72",
+      "mem-project-workflow-ecaf7572f216"
+    ],
+    "response_contains": [
+      "先看项目工作流总览",
+      "模板与导出约束"
+    ]
+  }
+}

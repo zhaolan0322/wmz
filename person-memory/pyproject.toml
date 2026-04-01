@@ -1,0 +1,11 @@
+[project]
+name = "memory-system-runtime"
+version = "0.1.0"
+description = "Personal layered AI memory system runtime MVP"
+requires-python = ">=3.12"
+dependencies = [
+  "PyYAML>=6.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

@@ -1,0 +1,21 @@
+{
+  "case_id": "HL-002",
+  "version": "v1.0",
+  "query": "上次研究任务是怎么起步的？",
+  "environment": {
+    "project_id": "research",
+    "explicit_recall_requested": true,
+    "delivery_level_ceiling": 2
+  },
+  "expected": {
+    "query_type": "project_planning",
+    "delivery_level": 2,
+    "must_include_memory_ids": [
+      "mem-dyn-research-start"
+    ],
+    "response_contains": [
+      "先定输出格式",
+      "再补资料"
+    ]
+  }
+}

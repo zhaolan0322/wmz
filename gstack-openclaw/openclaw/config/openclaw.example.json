@@ -1,0 +1,50 @@
+{
+  agents: {
+    defaults: {
+      subagents: {
+        maxSpawnDepth: 1,
+        maxConcurrent: 4,
+        runTimeoutSeconds: 1800,
+      },
+    },
+    list: [
+      {
+        id: "leader",
+        default: true,
+        workspace: "~/.openclaw/workspace-gstack-leader",
+        agentDir: "~/.openclaw/agents/leader/agent",
+        thinkingDefault: "high",
+        subagents: { allowAgents: ["builder", "reviewer", "qa", "deploy"] },
+      },
+      {
+        id: "builder",
+        workspace: "~/.openclaw/workspace-gstack-builder",
+        agentDir: "~/.openclaw/agents/builder/agent",
+        thinkingDefault: "high",
+      },
+      {
+        id: "reviewer",
+        workspace: "~/.openclaw/workspace-gstack-reviewer",
+        agentDir: "~/.openclaw/agents/reviewer/agent",
+        thinkingDefault: "high",
+      },
+      {
+        id: "qa",
+        workspace: "~/.openclaw/workspace-gstack-qa",
+        agentDir: "~/.openclaw/agents/qa/agent",
+        thinkingDefault: "high",
+      },
+      {
+        id: "deploy",
+        workspace: "~/.openclaw/workspace-gstack-deploy",
+        agentDir: "~/.openclaw/agents/deploy/agent",
+        thinkingDefault: "high",
+      },
+    ],
+  },
+  skills: {
+    entries: {
+      build: { enabled: true },
+    },
+  },
+}

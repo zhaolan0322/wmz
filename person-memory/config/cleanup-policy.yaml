@@ -1,0 +1,11 @@
+cleanup_priority:
+  outdatedness: 0.30
+  low_usage: 0.20
+  low_confidence: 0.15
+  low_importance: 0.15
+  duplication_risk: 0.10
+  unclear_utility: 0.10
+  thresholds:
+    monitor_min: 0.35
+    archive_min: 0.60
+    delete_review_min: 0.80

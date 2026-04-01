@@ -1,0 +1,21 @@
+{
+  "case_id": "PP-001",
+  "version": "v1.0",
+  "query": "sync-engine 的排查流程怎么走？",
+  "environment": {
+    "project_id": "sync-engine",
+    "explicit_recall_requested": true,
+    "delivery_level_ceiling": 3
+  },
+  "expected": {
+    "query_type": "problem_blocked",
+    "delivery_level": 3,
+    "must_include_memory_ids": [
+      "mem-proc-sync-debug"
+    ],
+    "response_contains": [
+      "缩范围",
+      "回写"
+    ]
+  }
+}

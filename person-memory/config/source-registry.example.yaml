@@ -1,0 +1,10 @@
+settings:
+  default_project_id: example-project
+  codex_home: C:\Users\<you>\.codex
+  openclaw_root: C:\path\to\memory_system_runtime\openclaw
+projects:
+  - project_id: example-project
+    project_name: Example Project
+    project_path: C:\path\to\your\project
+    session_ids:
+      - YOUR_SESSION_ID

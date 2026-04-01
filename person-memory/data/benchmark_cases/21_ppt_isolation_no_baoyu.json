@@ -1,0 +1,25 @@
+{
+  "case_id": "ISO-001",
+  "version": "v1.0",
+  "query": "PPT skill项目 默认是可编辑PPT路线还是全AI视觉路线？",
+  "environment": {
+    "project_id": "ppt-skill-project",
+    "explicit_recall_requested": true,
+    "delivery_level_ceiling": 2
+  },
+  "expected": {
+    "query_type": "project_planning",
+    "delivery_level": 2,
+    "must_include_memory_ids": [
+      "mem-project-workflow-ecaf7572f216"
+    ],
+    "response_contains": [
+      "Path A",
+      "Path B"
+    ],
+    "response_not_contains": [
+      "每页一张全屏图片",
+      "baoyu"
+    ]
+  }
+}

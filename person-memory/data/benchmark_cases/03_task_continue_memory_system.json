@@ -1,0 +1,19 @@
+{
+  "case_id": "TC-001",
+  "version": "v1.0",
+  "query": "请继续当前记忆系统任务",
+  "environment": {
+    "task_id": "task-memory-mvp"
+  },
+  "expected": {
+    "query_type": "task_continue",
+    "delivery_level": 2,
+    "must_include_memory_ids": [
+      "mem-work-memory-mvp"
+    ],
+    "response_contains": [
+      "设计稿",
+      "MVP"
+    ]
+  }
+}
