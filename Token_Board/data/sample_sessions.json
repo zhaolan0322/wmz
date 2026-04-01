@@ -1,0 +1,50 @@
+[
+  {
+    "sessionKey": "telegram:demo-user-alpha",
+    "updatedAt": "2026-03-14T15:00:00Z",
+    "inputTokens": 1200,
+    "outputTokens": 800,
+    "totalTokens": 2000
+  },
+  {
+    "sessionKey": "discord:chan:ops",
+    "updatedAt": "2026-03-12T15:00:00Z",
+    "usage": {
+      "inputTokens": 5000,
+      "outputTokens": 1400,
+      "totalTokens": 6400
+    }
+  },
+  {
+    "sessionKey": "cron:job:daily",
+    "updatedAt": "2026-03-04T15:00:00Z",
+    "usage": {
+      "inputTokens": 300,
+      "outputTokens": 700,
+      "totalTokens": 1000
+    }
+  },
+  {
+    "sessionKey": "feishu:chat:abc",
+    "updatedAt": "2026-03-13T15:00:00Z",
+    "tokenUsage": {
+      "input_tokens": 900,
+      "output_tokens": 200,
+      "total_tokens": 1100
+    }
+  },
+  {
+    "sessionKey": "telegram:group:demo-room-1",
+    "updatedAt": "2026-02-07T15:00:00Z",
+    "inputTokens": 100,
+    "outputTokens": 50,
+    "totalTokens": 150
+  },
+  {
+    "sessionKey": "weird:custom",
+    "updatedAt": "2026-03-14T10:00:00Z",
+    "inputTokens": 60,
+    "outputTokens": 40,
+    "totalTokens": 100
+  }
+]

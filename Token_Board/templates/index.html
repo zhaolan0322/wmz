@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Token Dashboard</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <main class="container">
+      <header class="topbar">
+        <div class="topbar-main">
+        <div class="headline">
+          <div class="headline-top">
+            <span class="status-dot"></span>
+            <span class="eyebrow">Token Board 2.0</span>
+            <span class="pipe">/</span>
+            <span id="statusLine" class="status-line">正在读取经营数据...</span>
+          </div>
+          <h1>OpenClaw 经营决策看板</h1>
+          <p id="metaLine" class="meta-line">Build loading...</p>
+        </div>
+
+        <aside id="runtimePanel" class="runtime-panel">
+          <div class="runtime-empty">正在读取当前账号 / 模型...</div>
+        </aside>
+        </div>
+
+        <div class="control-band">
+          <label class="field bot-field">
+            <span>Bot</span>
+            <select id="agentSelect"></select>
+          </label>
+
+          <div class="control-right">
+            <div class="chip-group">
+              <span>项目视图</span>
+              <div id="projectLimitGroup" class="chip-row">
+                <button class="chip-button active" data-project-limit="10">Top 10</button>
+                <button class="chip-button" data-project-limit="all">全部</button>
+              </div>
+            </div>
+
+            <div id="rangeSwitcher" class="range-switcher">
+              <button data-range="today">Today</button>
+              <button data-range="7d" class="active">7 Days</button>
+              <button data-range="30d">30 Days</button>
+              <button data-range="all">All Time</button>
+            </div>
+
+            <button id="officeViewBtn" class="secondary-button">办公室视图</button>
+            <button id="refreshNowBtn" class="primary-button">立即刷新</button>
+          </div>
+        </div>
+      </header>
+
+      <section id="summaryCards" class="summary-strip"></section>
+
+      <section class="dashboard-grid">
+        <section class="panel span-8">
+          <div class="section-header">
+            <span class="section-kicker">Bot Comparison</span>
+            <h2 id="compareSectionTitle">Bot 消耗对比</h2>
+          </div>
+          <div id="botCompareHeader" class="compare-header"></div>
+          <div id="botComparison" class="bot-comparison"></div>
+        </section>
+
+        <section class="panel span-4">
+          <div class="section-header">
+            <span class="section-kicker">Risk Fuse</span>
+            <h2>风险与止损</h2>
+          </div>
+          <div id="riskPanel" class="risk-panel"></div>
+        </section>
+      </section>
+
+      <section class="dashboard-grid">
+        <section class="panel span-7">
+          <div class="section-header">
+            <span class="section-kicker">Project Ranking</span>
+            <h2>项目 / 成本中心排行</h2>
+          </div>
+          <div id="projectTable" class="table-card"></div>
+        </section>
+
+        <section class="panel span-5">
+          <div class="section-header">
+            <span class="section-kicker">Top Sessions</span>
+            <h2>高消耗会话</h2>
+          </div>
+          <div id="topTable" class="table-card"></div>
+        </section>
+      </section>
+
+      <section class="dashboard-grid">
+        <section class="panel span-6">
+          <div class="section-header">
+            <span class="section-kicker">Cost Mix</span>
+            <h2>消耗结构</h2>
+          </div>
+          <div id="efficiencyBars" class="stack-bars compact-bars"></div>
+          <div id="workstreamBars" class="stack-bars compact-bars workstream-block"></div>
+        </section>
+
+        <section class="panel span-6">
+          <div class="section-header">
+            <span class="section-kicker">Bot Performance</span>
+            <h2>Bot 经营效率</h2>
+          </div>
+          <div id="agentTable" class="table-card"></div>
+        </section>
+      </section>
+
+      <section class="dashboard-grid">
+        <section class="panel span-6">
+          <div class="section-header">
+            <span class="section-kicker">Model Mix</span>
+            <h2>模型成本结构</h2>
+          </div>
+          <div id="modelTable" class="table-card"></div>
+        </section>
+
+        <section class="panel span-6">
+          <div class="section-header">
+            <span class="section-kicker">Insight</span>
+            <h2>经营建议</h2>
+          </div>
+          <div id="insightBox" class="insight-list"></div>
+          <div class="instrument-note">
+            一次完成率 / 返工率 / 项目 ROI 还未接入标准 task_id 与 status 埋点，当前不做伪指标展示。
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
